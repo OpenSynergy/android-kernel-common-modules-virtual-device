@@ -70,6 +70,7 @@ struct drm_virtgpu_execbuffer {
 	__s32 fence_fd; /* in/out fence fd (see VIRTGPU_EXECBUF_FENCE_FD_IN/OUT) */
 };
 
+
 #define VIRTGPU_PARAM_3D_FEATURES 1 /* do we have 3D features in the hw */
 #define VIRTGPU_PARAM_CAPSET_QUERY_FIX 2 /* do we have the capset fix */
 #define VIRTGPU_PARAM_RESOURCE_BLOB 3 /* DRM_VIRTGPU_RESOURCE_CREATE_BLOB */
@@ -151,8 +152,8 @@ struct drm_virtgpu_get_caps {
 
 struct drm_virtgpu_resource_create_blob {
 #define VIRTGPU_BLOB_MEM_GUEST              0x0001
-#define VIRTGPU_BLOB_MEM_HOST               0x0002
-#define VIRTGPU_BLOB_MEM_HOST_GUEST         0x0003
+#define VIRTGPU_BLOB_MEM_HOST3D             0x0002
+#define VIRTGPU_BLOB_MEM_HOST3D_GUEST       0x0003
 
 #define VIRTGPU_BLOB_FLAG_MAPPABLE          0x0001
 #define VIRTGPU_BLOB_FLAG_SHAREABLE         0x0002
