@@ -1,0 +1,34 @@
+. ${ROOT_DIR}/common/build.config.common
+. ${ROOT_DIR}/common/build.config.aarch64
+. ${ROOT_DIR}/common/build.config.gki_kasan
+
+BUILD_INITRAMFS=1
+EXT_MODULES="common-modules/virtual-device"
+LZ4_RAMDISK=1
+DEFCONFIG=cf_aarch_64_gki_defconfig
+PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/common/arch/arm64/configs/${DEFCONFIG} ${ROOT_DIR}/common/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/common/arch/arm64/configs/gki_defconfig ${ROOT_DIR}/common-modules/virtual-device/cuttlefish.fragment"
+POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/common/arch/arm64/configs/${DEFCONFIG} && update_kasan_config"
+
+KERNEL_DIR=common
+function update_kasan_config() {
+    ${KERNEL_DIR}/scripts/config --file ${OUT_DIR}/.config \
+         -e CONFIG_KASAN \
+         -e CONFIG_KASAN_INLINE \
+         -e CONFIG_KASAN_PANIC_ON_WARN \
+         -e CONFIG_KCOV \
+         -e CONFIG_PANIC_ON_WARN_DEFAULT_ENABLE \
+         -d CONFIG_RANDOMIZE_BASE \
+         -d CONFIG_KASAN_OUTLINE \
+         --set-val CONFIG_FRAME_WARN 0 \
+         -d LTO \
+         -d LTO_CLANG \
+         -d CFI \
+         -d CFI_PERMISSIVE \
+         -d CFI_CLANG \
+         -d SHADOW_CALL_STACK
+    (cd ${OUT_DIR} && \
+     make ${CC_LD_ARG} O=${OUT_DIR} olddefconfig)
+}
+
+# Not saving any kernel images. This build step is meant purely to generate the .kos.
+FILES=""
