@@ -1,15 +1,12 @@
-. ${ROOT_DIR}/common/build.config.common
-. ${ROOT_DIR}/common/build.config.x86_64
-. ${ROOT_DIR}/common/build.config.gki_kasan
+. ${ROOT_DIR}/common-modules/virtual-device/build.config.cuttlefish
 
-BUILD_INITRAMFS=1
-EXT_MODULES="common-modules/virtual-device/"
-LZ4_RAMDISK=1
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki_kasan
+
 DEFCONFIG=cf_x86_64_gki_defconfig
-PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/common/arch/x86/configs/${DEFCONFIG} ${ROOT_DIR}/common/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/common/arch/x86/configs/gki_defconfig ${ROOT_DIR}/common--modules/cuttlefish.fragment"
-POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/common/arch/x86/configs/${DEFCONFIG} && update_kasan_config"
+PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/gki_defconfig ${ROOT_DIR}/common-modules/virtual-device/cuttlefish.fragment"
+POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/${DEFCONFIG} && update_kasan_config"
 
-KERNEL_DIR=common
 function update_kasan_config() {
     ${KERNEL_DIR}/scripts/config --file ${OUT_DIR}/.config \
          -e CONFIG_KASAN \

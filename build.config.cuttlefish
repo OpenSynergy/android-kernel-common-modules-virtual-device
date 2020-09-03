@@ -1,0 +1,8 @@
+KERNEL_DIR=common
+
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.common
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki
+
+BUILD_INITRAMFS=1
+EXT_MODULES="common-modules/virtual-device"
+LZ4_RAMDISK=1
