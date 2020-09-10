@@ -4,3 +4,5 @@ obj-m += goldfish_pipe.o
 obj-m += goldfish_sync.o
 obj-m += goldfish_address_space.o
 obj-m += goldfish_battery.o
+
+LINUXINCLUDE := -I$(srctree)/../common-modules/virtual-device/uapi ${LINUXINCLUDE}

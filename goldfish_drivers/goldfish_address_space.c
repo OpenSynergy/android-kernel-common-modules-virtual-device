@@ -16,7 +16,7 @@
 #include <linux/pci_ids.h>
 #include <linux/pci.h>
 
-#include "uapi/goldfish_address_space.h"
+#include <goldfish/goldfish_address_space.h>
 
 MODULE_DESCRIPTION("A Goldfish driver that allocates address space ranges in "
 		   "the guest to populate them later in the host. This allows "

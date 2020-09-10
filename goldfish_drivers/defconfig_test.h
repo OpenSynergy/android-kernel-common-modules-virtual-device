@@ -20,8 +20,20 @@
 #error CONFIG_PCI is required
 #endif
 
+#ifndef CONFIG_ZRAM
+#error CONFIG_ZRAM is required
+#endif
+
+#ifndef CONFIG_ZSMALLOC
+#error CONFIG_ZSMALLOC is required
+#endif
+
 #ifndef CONFIG_COMPAT
 #error CONFIG_COMPAT is required
+#endif
+
+#ifndef CONFIG_USB_DUMMY_HCD
+#error CONFIG_USB_DUMMY_HCD is required
 #endif
 
 #ifdef CONFIG_BLK_DEV_MD
@@ -68,10 +80,6 @@
 #error CONFIG_TEST_MEMINIT is a module in goldfish_defconfig.fragment
 #endif
 
-#ifdef CONFIG_USB_DUMMY_HCD
-#error CONFIG_USB_DUMMY_HCD is a module in goldfish_defconfig.fragment
-#endif
-
 #ifdef CONFIG_VIRTIO_BLK
 #error CONFIG_VIRTIO_BLK is a module in goldfish_defconfig.fragment
 #endif
@@ -98,16 +106,4 @@
 
 #ifdef CONFIG_VIRTIO_PMEM
 #error CONFIG_VIRTIO_PMEM is a module in goldfish_defconfig.fragment
-#endif
-
-#ifdef CONFIG_INCREMENTAL_FS
-#error CONFIG_INCREMENTAL_FS is a module in goldfish_defconfig.fragment
-#endif
-
-#ifdef CONFIG_ZRAM
-#error CONFIG_ZRAM is a module in goldfish_defconfig.fragment
-#endif
-
-#ifdef CONFIG_ZSMALLOC
-#error CONFIG_ZSMALLOC is a module in goldfish_defconfig.fragment
 #endif

@@ -61,7 +61,7 @@
 #include <linux/mm.h>
 #include <linux/bug.h>
 
-#include "uapi/goldfish_dma.h"
+#include <goldfish/goldfish_dma.h>
 #include "goldfish_pipe_qemu.h"
 #include "goldfish_pipe.h"
 

@@ -3,9 +3,5 @@
 
 DEFCONFIG=goldfish_86_64_defconfig
 DEFCONFIG_PATH="${ROOT_DIR}/common/arch/x86/configs"
-PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${DEFCONFIG_PATH}/${DEFCONFIG} ${ROOT_DIR}/common/scripts/kconfig/merge_config.sh -m -r ${DEFCONFIG_PATH}/gki_defconfig ${FRAGMENT_DEFCONFIG_PATH}"
+PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/gki_defconfig ${FRAGMENT_DEFCONFIG_PATH}"
 POST_DEFCONFIG_CMDS="rm ${DEFCONFIG_PATH}/${DEFCONFIG}"
-
-# Not building/saving any kernel images. This build step is meant purely to generate the .kos.
-FILES=""
-MAKE_GOALS="modules"

@@ -36,7 +36,7 @@
 #include <linux/types.h>
 #include <linux/uaccess.h>
 
-#include "uapi/goldfish_sync.h"
+#include <goldfish/goldfish_sync.h>
 
 struct sync_pt {
 	struct dma_fence base;	/* must be the first field in this struct */
