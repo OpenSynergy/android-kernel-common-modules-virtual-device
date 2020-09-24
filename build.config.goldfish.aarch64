@@ -1,7 +1,7 @@
 . ${ROOT_DIR}/common-modules/virtual-device/build.config.goldfish
-. ${ROOT_DIR}/common/build.config.aarch64
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.aarch64
 
 DEFCONFIG=goldfish_aarch64_defconfig
-DEFCONFIG_PATH="${ROOT_DIR}/common/arch/arm64/configs"
+DEFCONFIG_PATH="${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs"
 PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/arm64/configs/gki_defconfig ${FRAGMENT_DEFCONFIG_PATH}"
 POST_DEFCONFIG_CMDS="rm ${DEFCONFIG_PATH}/${DEFCONFIG}"
