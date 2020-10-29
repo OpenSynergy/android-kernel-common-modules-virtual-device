@@ -861,7 +861,7 @@ out_release_area_bar:
 out_release_control_bar:
 	pci_release_region(dev, AS_PCI_CONTROL_BAR_ID);
 out_free_device_state:
-	kzfree(state);
+	kfree(state);
 
 	return res;
 }
