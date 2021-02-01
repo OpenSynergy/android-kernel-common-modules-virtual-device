@@ -18,7 +18,7 @@ EXTRA_CFLAGS += -Wno-unused-function
 #EXTRA_CFLAGS += -Wno-implicit-fallthrough
 #EXTRA_CFLAGS += -Wno-return-type
 
-EXTRA_CFLAGS += -I$(src)/include
+EXTRA_CFLAGS += -I$(srctree)/$(src)/include
 
 EXTRA_LDFLAGS += --strip-debug
 
@@ -255,10 +255,10 @@ _HAL_INTFS_FILES :=	hal/hal_intf.o \
 			hal/led/hal_$(HCI_NAME)_led.o
 
 
-EXTRA_CFLAGS += -I$(src)/platform
+EXTRA_CFLAGS += -I$(srctree)/$(src)/platform
 _PLATFORM_FILES := platform/platform_ops.o
 
-EXTRA_CFLAGS += -I$(src)/hal/btc
+EXTRA_CFLAGS += -I$(srctree)/$(src)/hal/btc
 
 ########### HAL_RTL8188E #################################
 ifeq ($(CONFIG_RTL8188E), y)
@@ -2362,7 +2362,7 @@ ifeq ($(CONFIG_RTL8723B), y)
 $(MODULE_NAME)-$(CONFIG_MP_INCLUDED)+= core/rtw_bt_mp.o
 endif
 
-obj-$(CONFIG_RTL8821CU) := $(MODULE_NAME).o
+obj-m := $(MODULE_NAME).o
 
 else
 

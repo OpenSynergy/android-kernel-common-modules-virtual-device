@@ -1,6 +1,7 @@
 . ${ROOT_DIR}/common-modules/virtual-device/build.config.goldfish
 . ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64
 
+BUILD_RTL8821CU=m
 DEFCONFIG=goldfish_86_64_defconfig
 DEFCONFIG_PATH="${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs"
 PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/gki_defconfig ${FRAGMENT_DEFCONFIG_PATH}"

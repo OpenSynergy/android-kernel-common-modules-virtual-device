@@ -646,7 +646,6 @@ extern int ATOMIC_DEC_RETURN(ATOMIC_T *v);
 extern bool ATOMIC_INC_UNLESS(ATOMIC_T *v, int u);
 
 /* File operation APIs, just for linux now */
-extern int rtw_is_dir_readable(const char *path);
 extern int rtw_is_file_readable(const char *path);
 extern int rtw_is_file_readable_with_size(const char *path, u32 *sz);
 extern int rtw_readable_file_sz_chk(const char *path, u32 sz);
