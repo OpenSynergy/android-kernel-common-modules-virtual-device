@@ -614,8 +614,10 @@ fail:
 }
 #endif
 
-int rtw_xmit_entry(_pkt *pkt, _nic_hdl pnetdev)
+netdev_tx_t rtw_xmit_entry(struct sk_buff *skb, struct net_device *dev)
 {
+	_pkt *pkt = (_pkt *)skb;
+	_nic_hdl pnetdev = (_nic_hdl)dev;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(pnetdev);
 	struct	mlme_priv	*pmlmepriv = &(padapter->mlmepriv);
 	int ret = 0;
