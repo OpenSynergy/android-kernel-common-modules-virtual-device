@@ -1,0 +1,27 @@
+. ${ROOT_DIR}/common-modules/virtual-device/build.config.cuttlefish
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.x86_64
+. ${ROOT_DIR}/${KERNEL_DIR}/build.config.gki_kprobes
+
+DEFCONFIG=cf_x86_64_gki_defconfig
+PRE_DEFCONFIG_CMDS="KCONFIG_CONFIG=${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/${DEFCONFIG} ${ROOT_DIR}/${KERNEL_DIR}/scripts/kconfig/merge_config.sh -m -r ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/gki_defconfig ${ROOT_DIR}/common-modules/virtual-device/cuttlefish.fragment"
+POST_DEFCONFIG_CMDS="rm ${ROOT_DIR}/${KERNEL_DIR}/arch/x86/configs/${DEFCONFIG} && update_kprobes_config"
+DO_NOT_STRIP_MODULES=1
+function update_kprobes_config() {
+    ${KERNEL_DIR}/scripts/config --file ${OUT_DIR}/.config \
+       -d CONFIG_LTO \
+       -d CONFIG_LTO_CLANG \
+       -d CONFIG_CFI_CLANG \
+       -d CFI_PERMISSIVE \
+       -d CFI_CLANG \
+       -e CONFIG_FUNCTION_TRACER \
+       -e CONFIG_IRQSOFF_TRACER \
+       -e CONFIG_PREEMPT_TRACER \
+       -e CONFIG_DEBUG_FS \
+       -e CONFIG_CHECKPOINT_RESTORE \
+       -d CONFIG_RANDOMIZE_BASE
+    (cd ${OUT_DIR} && \
+     make ${CC_LD_ARG} O=${OUT_DIR} olddefconfig)
+}
+
+# Not saving any kernel images. This build step is meant purely to generate the .kos.
+FILES=""
