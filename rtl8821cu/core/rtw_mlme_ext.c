@@ -14315,7 +14315,7 @@ u8 rtw_scan_backop_decision(_adapter *adapter)
 }
 #endif
 
-#define SCANNING_TIMEOUT_EX	2000
+#define SCANNING_TIMEOUT_EX	20000
 u32 rtw_scan_timeout_decision(_adapter *padapter)
 {
 	u32 back_op_times= 0;
